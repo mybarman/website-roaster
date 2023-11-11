@@ -26,6 +26,9 @@ dependencies:
   playwright:
     specifier: ^1.39.0
     version: 1.39.0
+  playwright-aws-lambda:
+    specifier: ^0.10.0
+    version: 0.10.0(playwright-core@1.39.0)
   puppeteer:
     specifier: ^21.5.1
     version: 21.5.1(typescript@5.0.2)
@@ -3290,6 +3293,14 @@ packages:
       json-buffer: 3.0.1
     dev: true
 
+  /lambdafs@2.1.1:
+    resolution: {integrity: sha512-x5k8JcoJWkWLvCVBzrl4pzvkEHSgSBqFjg3Dpsc4AcTMq7oUMym4cL/gRTZ6VM4mUMY+M0dIbQ+V1c1tsqqanQ==}
+    engines: {node: '>= 10.16'}
+    hasBin: true
+    dev: false
+    bundledDependencies:
+      - tar-fs
+
   /language-subtag-registry@0.3.22:
     resolution: {integrity: sha512-tN0MCzyWnoz/4nHS6uxdlFWoUZT7ABptwKPQ52Ea7URk6vll88bWBVhodtnlfEuCcKWNGoc+uGbw1cwa9IKh/w==}
     dev: true
@@ -3614,6 +3625,16 @@ packages:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
     dev: true
+
+  /playwright-aws-lambda@0.10.0(playwright-core@1.39.0):
+    resolution: {integrity: sha512-osGbx0Nwco6E9JZK/2Uq3lrQ5rmjLEQ9Iw0286wQZ93s+8Ok8IwOmzP765JGTRDvjd/5woE5qwICnhw9iPisOQ==}
+    engines: {node: '>= 8.0.0'}
+    peerDependencies:
+      playwright-core: ^1
+    dependencies:
+      lambdafs: 2.1.1
+      playwright-core: 1.39.0
+    dev: false
 
   /playwright-core@1.39.0:
     resolution: {integrity: sha512-+k4pdZgs1qiM+OUkSjx96YiKsXsmb59evFoqv8SKO067qBA+Z2s/dCzJij/ZhdQcs2zlTAgRKfeiiLm8PQ2qvw==}

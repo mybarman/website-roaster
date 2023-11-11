@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { chromium, Browser, Page } from "playwright";
+import { Browser, Page } from "playwright";
+import playwright from "playwright-aws-lambda";
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,7 +10,7 @@ export default async function handler(
 
   try {
     // Launch the browser
-    browser = await chromium.launch();
+    browser = await playwright.launchChromium();
     const page: Page = await browser.newPage();
 
     // Navigate to the requested URL
