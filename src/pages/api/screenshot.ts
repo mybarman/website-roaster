@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import puppeteer, { Browser, Page } from "puppeteer";
+import { chromium, Browser, Page } from "playwright";
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,7 +9,7 @@ export default async function handler(
 
   try {
     // Launch the browser
-    browser = await puppeteer.launch();
+    browser = await chromium.launch();
     const page: Page = await browser.newPage();
 
     // Navigate to the requested URL
@@ -18,18 +18,18 @@ export default async function handler(
       res.status(400).send("Invalid URL");
       return;
     }
-    await page.setViewport({ width: 1280, height: 800 });
+    await page.setViewportSize({ width: 1320, height: 800 });
     await page.goto(url, { waitUntil: "domcontentloaded" });
-    await new Promise((r) => setTimeout(r, 1000));
+    await page.waitForTimeout(1000);
 
     await page.focus("body"); // Replace 'selector' with your actual selector
     let scrollArea = 0;
     for (let i = 0; i < 10; i++) {
       const deltaScroll = Math.random() * 100;
       scrollArea += deltaScroll;
-      await page.mouse.wheel({ deltaY: deltaScroll });
+      await page.mouse.wheel(0, deltaScroll);
     }
-    page.mouse.wheel({ deltaY: -scrollArea });
+    await page.mouse.wheel(0, -scrollArea);
 
     // Take a screenshot
     const screenshot = await page.screenshot({ fullPage: true });
