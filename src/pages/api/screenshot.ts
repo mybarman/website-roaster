@@ -38,6 +38,7 @@ export default async function handler(
     res.setHeader("Content-Type", "image/png");
     res.send(screenshot);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "Failed to take screenshot" });
   } finally {
     // Close the browser
