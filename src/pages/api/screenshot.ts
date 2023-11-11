@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Browser, Page } from "playwright";
-import playwright from "playwright-aws-lambda";
+import playwright, { Browser, Page } from "playwright";
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,7 +9,9 @@ export default async function handler(
 
   try {
     // Launch the browser
-    browser = await playwright.launchChromium();
+    browser = await playwright.chromium.connectOverCDP(
+      `wss://chrome.browserless.io?token=${process.env.BROWSERLESS_API_KEY}`
+    );
     const page: Page = await browser.newPage();
 
     // Navigate to the requested URL
